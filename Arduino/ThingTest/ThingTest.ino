@@ -10,7 +10,7 @@ bool buttonPressed = false;
 
 // Replace REPLACE_ME with TTN_FP_EU868 or TTN_FP_US915
 #define freqPlan TTN_FP_EU868
-    
+
 TheThingsNetwork ttn(loraSerial, debugSerial, freqPlan);
     
 void setup() {
@@ -65,18 +65,5 @@ void loop() {
 
 void message(const byte* payload, int length, int port) {
   debugSerial.println("-- MESSAGE");
-    
-  // Only handle messages of a single byte
-  if (length != 1) {
-    return;
-  }
-    
-  if (payload[0] == 0) {
-    debugSerial.println("LED: off");
-    digitalWrite(LED_BUILTIN, LOW);
-          
-  } else if (payload[0] == 1) {
-    debugSerial.println("LED: on");
-    digitalWrite(LED_BUILTIN, HIGH);
-  }
+  debugSerial.println(String((char*) payload));
 }
