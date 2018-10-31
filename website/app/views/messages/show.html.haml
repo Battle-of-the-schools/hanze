@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Message:
+  = @message.message
+%p
+  %b Location:
+  = @message.location
+
+= link_to 'Edit', edit_message_path(@message)
+\|
+= link_to 'Back', messages_path
