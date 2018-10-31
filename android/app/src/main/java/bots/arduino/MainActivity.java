@@ -32,12 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
+	boolean ledOn = false;
 
 	public void testArduino(View view) {
 
+		ledOn = !ledOn;
+		byte[] buf = (ledOn ? "1" : "0").getBytes();
+		mPhysicaloid.write(buf, buf.length);
 
 
-
+		Toast.makeText(this, ledOn ? "led on" : "led off", Toast.LENGTH_LONG).show();
 	}
 
 }
