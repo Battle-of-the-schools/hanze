@@ -72,7 +72,7 @@ public class ArduinoConnection {
 								// We are supposing here there is only one device connected and it is our serial device
 								connection = usbManager.openDevice(device);
 								keep = false;
-								dumper.dump("connection? " + connection);
+//								dumper.dump("connection? " + connection);
 
 								if (connection != null)
 									startReading();
@@ -128,7 +128,9 @@ public class ArduinoConnection {
 				// got all content
 				String json = buffer.substring(0, expectedLength);
 				context.runOnUiThread(() -> Toast.makeText(context, json, Toast.LENGTH_LONG).show());
-				dumper.dump(json);
+//				dumper.dump(json);
+
+				onJsonMessage(json);
 
 				buffer = buffer.substring(expectedLength);
 				expectedLength = 0;
@@ -141,14 +143,14 @@ public class ArduinoConnection {
 
 	private void startReading() {
 
-		dumper.dump(device.getDeviceName());
-		dumper.dump(device.toString());
+//		dumper.dump(device.getDeviceName());
+//		dumper.dump(device.toString());
 
 		serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
 		if (serialPort != null) {
-			dumper.dump("serialport");
+//			dumper.dump("serialport");
 			if (serialPort.open()) {
-				dumper.dump("serialport open");
+//				dumper.dump("serialport open");
 				// Devices are opened with default values, Usually 9600,8,1,None,OFF
 				// CDC driver default values 115200,8,1,None,OFF
 				serialPort.setBaudRate(9600);
@@ -165,11 +167,20 @@ public class ArduinoConnection {
 		}
 	}
 
+	private void onJsonMessage(String json) {
+		// todo
+	}
+
 	public boolean writeString(String str) {
 
-		if (serialPort == null) return false;
+		if (serialPort == null) {
+			dumper.dump("no serial port");
+			return false;
+		}
 
+		str += "\n";
 		serialPort.write(str.getBytes());
+		dumper.dump(str);
 		return true;
 	}
 
