@@ -41,7 +41,6 @@
     animation: move-up-down 7s linear infinite;
 }
 
-
 @keyframes move-up-down {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }

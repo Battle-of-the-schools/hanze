@@ -1,17 +1,17 @@
 .row
-    .col-md-6
+    .col-md-6.home
         %h1.mt1 LoSOS
         %p.mb0 Emergancy networkover long distance, 
         %p.mb0 using LoRaWAN Network.
         %p.mb1 Saving lives that matter.
         = link_to('Login', new_caretaker_session_path, :class => "btn btn-primary")
-        = link_to('Register', new_caretaker_registration_path, :class => "btn btn-ghost") 
+        = link_to('or Register', new_caretaker_registration_path, :class => "btn btn-ghost") 
     .col-md-6
         .image-placeholders
-            .image-placeholder.second
-                = image_tag("loSOS.svg")
             .image-placeholder.first
                 = image_tag("broken-leg.svg")
             .image-placeholder.thirth
                 = image_tag("doctor.svg")
+            .image-placeholder.second
+                = image_tag("loSOS.svg")
 

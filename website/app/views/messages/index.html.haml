@@ -1,7 +1,7 @@
 
 .row
   .col-md-6
-    %h1 Messages
+    %h2 Messages
     - @messages.each do |message|
       .message-item{id: "message-#{message.id}"}
         .row
@@ -15,7 +15,7 @@
 %br
 
 :javascript
-  var mymap = L.map('map-overview').setView([51.505, -0.09], 13);
+  var mymap = L.map('map-overview').setView([18.546391, -73.342789], 8);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1IjoibG9zb3MiLCJhIjoiY2pueXhwZ3RvMDFzdzNrbXFicnlmY3Q1YiJ9.ixxDbuWyXhWX4PY4qt07ZA', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
