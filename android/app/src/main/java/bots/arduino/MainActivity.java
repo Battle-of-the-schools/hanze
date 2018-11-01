@@ -29,4 +29,8 @@ public class MainActivity extends AppCompatActivity {
 		arduinoConnection.writeString("{'hallo_timo': 4555435, 'pizza': [4, 5, 5, 6]}");
 	}
 
+	public void setFragment() {
+		
+	}
+
 }
