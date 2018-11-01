@@ -12,8 +12,8 @@ bool buttonPressed = false;
 bool lastButtonState = false;
 
 //GPS
-float flat = 0;
-float flong = 0;
+float flat = 123.456;
+float flong = 123.456;
 
 // Replace REPLACE_ME with TTN_FP_EU868 or TTN_FP_US915
 #define freqPlan TTN_FP_EU868
@@ -22,7 +22,7 @@ TheThingsNetwork ttn(loraSerial, debugSerial, freqPlan);
     
 void setup() {
   pinMode(button, INPUT_PULLUP);
-  // Set callback for incoming messages
+  //Set callback for incoming messages
   ttn.onMessage(message);
   loraSerial.begin(57600);
   debugSerial.begin(9600);
@@ -78,15 +78,16 @@ void loop() {
     //debugSerial.println("-- HELP");
     String outStr = "HELP";
     outStr.concat(',');
-    outStr.concat(String(flat));
+    outStr.concat(flat);
     outStr.concat(',');
-    outStr.concat(String(flong));
+    outStr.concat(flong);
     
     // Send it off
     byte data[outStr.length()];
     outStr.getBytes(data, outStr.length());
     ttn.sendBytes(data, sizeof(data));
   }
+  ttn.poll();
 }
 
 void message(const byte* payload, int length, int port) {
@@ -96,6 +97,6 @@ void message(const byte* payload, int length, int port) {
 }
 
 void buttonHandler() {
-  lastButtonState = buttonPressed;
+  lastButtonState = !buttonPressed;
   buttonPressed = digitalRead(button);
 }
