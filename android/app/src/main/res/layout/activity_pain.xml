@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".fragments.Pain">
+    android:layout_height="match_parent"
+    tools:context=".activities.PainActivity">
+
 
     <ImageView
         android:id="@+id/imageView7"
+        android:onClick="heavy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
@@ -23,6 +25,7 @@
 
     <ImageView
         android:id="@+id/imageView9"
+        android:onClick="bad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -37,6 +40,7 @@
 
     <ImageView
         android:id="@+id/imageView10"
+        android:onClick="ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
