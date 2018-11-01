@@ -6,14 +6,14 @@
 #define button 8
 
 const char *appEui = "70B3D57ED0013EDC";
-const char *appKey = "609820B02340A427E7E7D47BCB093A22";
+const char *appKey = "A008F76AC619C1610144F4F8FFFD454E";
 
 bool buttonPressed = false;
 bool lastButtonState = false;
 
 //GPS
-float flat = 0;
-float flong = 0;
+float flat = 123.456;
+float flong = 123.456;
 
 // Replace REPLACE_ME with TTN_FP_EU868 or TTN_FP_US915
 #define freqPlan TTN_FP_EU868
@@ -22,7 +22,7 @@ TheThingsNetwork ttn(loraSerial, debugSerial, freqPlan);
     
 void setup() {
   pinMode(button, INPUT_PULLUP);
-  // Set callback for incoming messages
+  //Set callback for incoming messages
   ttn.onMessage(message);
   loraSerial.begin(57600);
   debugSerial.begin(9600);
@@ -38,9 +38,12 @@ void setup() {
   //debugSerial.println("-- JOIN");
   ttn.join(appEui, appKey);
   //debugSerial.println("-- LOOP"); // geeft aan de de loop begint
+
+  
 }
 
 String inData = "";
+unsigned long lastPollTime = 0;
 
 void loop() {
   buttonHandler();
@@ -64,28 +67,36 @@ void loop() {
             inData = ""; // Clear recieved buffer
         }
     }
-    
+
+  unsigned long timee = millis();
+  if (timee - lastPollTime > 10000) {
+    lastPollTime = timee;
+    ttn.poll();
+  }
+  
   if (buttonPressed && !lastButtonState) {
     //debugSerial.println("-- HELP");
     String outStr = "HELP";
     outStr.concat(',');
-    outStr.concat(String(flat));
+    outStr.concat(flat);
     outStr.concat(',');
-    outStr.concat(String(flong));
+    outStr.concat(flong);
     
     // Send it off
     byte data[outStr.length()];
     outStr.getBytes(data, outStr.length());
     ttn.sendBytes(data, sizeof(data));
   }
+  ttn.poll();
 }
 
 void message(const byte* payload, int length, int port) {
-  //debugSerial.println("-- MESSAGE");
+  debugSerial.print("Content-Length: ");
+  debugSerial.println(length);
   debugSerial.println(String((char*) payload));
 }
 
 void buttonHandler() {
-  lastButtonState = buttonPressed;
+  lastButtonState = !buttonPressed;
   buttonPressed = digitalRead(button);
 }
