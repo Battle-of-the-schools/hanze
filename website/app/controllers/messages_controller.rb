@@ -25,6 +25,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
+    puts message_params
 
     respond_to do |format|
       if @message.save
@@ -69,6 +70,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:message, :location, :latitude, :longitude)
+      params.require(:message).permit(:message, :location, :latitude, :longtitude)
     end
 end
