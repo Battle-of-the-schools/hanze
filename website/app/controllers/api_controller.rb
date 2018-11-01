@@ -7,15 +7,21 @@ class ApiController < ApplicationController
 
         puts params["longitude"]
 
-        message_params = {
-            "message" => params["payload_fields"]["message"], 
-            "location" => "haiti", 
-            "latitude" => params["metadata"]["gateways"][0]["latitude"], 
-            "longitude" => params["metadata"]["gateways"][0]["longitude"]
-        }
+        if params["payload_fields"]["message"].length > 0
+            message_params = {
+                "message" => params["payload_fields"]["message"], 
+                "location" => "haiti", 
+                "latitude" => params["metadata"]["gateways"][0]["latitude"], 
+                "longitude" => params["metadata"]["gateways"][0]["longitude"]
+            }
 
-        @message = Message.new(message_params)  
-        @message.save
+            if params["payload_fields"] == "HELP" || params["payload_fields"] == '"HELP"'
+                message_params["message"] = "HELP"
+            end
+
+            @message = Message.new(message_params)  
+            @message.save
+        end
     end
 end
 
