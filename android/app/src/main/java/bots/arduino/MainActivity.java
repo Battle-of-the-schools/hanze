@@ -21,11 +21,9 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		statusText = this.findViewById(R.id.status_text);
-		arduinoConnection = new ArduinoConnection(this, dumper, statusText);
+		arduinoConnection = new ArduinoConnection(this, dumper);
 		Thread.setDefaultUncaughtExceptionHandler(new UCExceptionHandler(dumper));
 	}
-
 
 	public void testButton(View view) {
 		arduinoConnection.writeString("{'hallo_timo': 4555435, 'pizza': [4, 5, 5, 6]}");

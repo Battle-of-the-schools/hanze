@@ -3,8 +3,9 @@
     package="bots.arduino">
 
     <uses-feature android:name="android.hardware.usb.host" />
-    <uses-permission android:name="android.hardware.usb.host"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.hardware.usb.host" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,8 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".BodyActivity"></activity>
     </application>
-
 
 </manifest>
