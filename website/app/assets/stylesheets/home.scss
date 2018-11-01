@@ -10,21 +10,40 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    border: 5px solid green;
+    border: 5px solid #1A7F2A;
     border-radius: 20px;
     position: absolute;
+    box-shadow: 5px 5px 9px 4px #0d0d0d69;
+    
+    &:hover {
+        box-shadow: 5px 5px 9px 4px #237f357a;
+    }
+
+    img {
+        width: 200px;
+    }
 }
 
 .image-placeholder.first {
     top: 40%;
+    animation: move-up-down 5s linear infinite;
 }
 
 .image-placeholder.second {
-    top: 25%;
+    top: 20%;
     left: 34%;
+    animation: move-up-down 8s linear infinite;
 }
 
 .image-placeholder.thirth {
-    top: 41%;
+    top: 43%;
     left: 70%;
+    animation: move-up-down 7s linear infinite;
+}
+
+
+@keyframes move-up-down {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 }

@@ -1,10 +1,14 @@
 .message-item {
-    margin-left: 30px;
+    margin: 30px 0px 30px 30px;
+    line-height: 18px;
 
     &:before {
         content: "";
         background-color: red;
-        width: 20px;
-        height: 20px;
+        width: 12px;
+        height: 30px;
+        display: block;
+        position: absolute;
+        left: 20px;
     }
 }

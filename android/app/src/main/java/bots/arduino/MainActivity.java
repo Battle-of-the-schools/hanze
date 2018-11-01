@@ -1,34 +1,30 @@
 package bots.arduino;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
-import bots.arduino.arduino.ArduinoConnection;
+import bots.arduino.activities.PainActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-	private ArduinoConnection arduinoConnection;
-
-	public TextView statusText;
+	private App app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		Dumper dumper = new Dumper(this);
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		statusText = this.findViewById(R.id.status_text);
-		arduinoConnection = new ArduinoConnection(this, dumper, statusText);
-		Thread.setDefaultUncaughtExceptionHandler(new UCExceptionHandler(dumper));
+		app = (App) this.getApplication();
+		app.init(this);
 	}
 
-
-	public void testButton(View view) {
-		arduinoConnection.writeString("{'hallo_timo': 4555435, 'pizza': [4, 5, 5, 6]}");
+	public void sos(View view) {
+		app.arduinoConnection.writeString("{'sos': true, 'gps': 10}");
+		Intent myIntent = new Intent(this, PainActivity.class);
+		startActivity(myIntent);
 	}
 
 }
