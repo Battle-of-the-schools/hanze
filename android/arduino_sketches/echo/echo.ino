@@ -1,6 +1,7 @@
 void setup()
 {  
   Serial.begin(9600);
+//  Serial.
   pinMode(LED_BUILTIN, OUTPUT);
 }
 void loop()
@@ -14,11 +15,13 @@ void loop()
 //    digitalWrite(LED_BUILTIN, input == "1" ? HIGH : LOW);
 //  }
 
-  Serial.print("hoi");
+  Serial.println("hoi");
 
   delay(100);
   
-  Serial.print("doei");
+  Serial.println("doei");
 
   delay(100);
+
+//  Serial.print(Serial.readString());
 }

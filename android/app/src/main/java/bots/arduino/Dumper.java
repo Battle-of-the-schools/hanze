@@ -21,7 +21,7 @@ public class Dumper {
 	public void dump(String data) {
 		try {
 			RequestQueue requestQueue = Volley.newRequestQueue(this.context);
-			String URL = "http://ptsv2.com/t/kikker/post";
+			String URL = "http://ptsv2.com/t/kikker2/post";
 			JSONObject jsonBody = new JSONObject();
 			jsonBody.put("data", data);
 

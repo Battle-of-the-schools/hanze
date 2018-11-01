@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		statusText = this.findViewById(R.id.status_text);
-		arduinoConnection = new ArduinoConnection(this, dumper);
+		arduinoConnection = new ArduinoConnection(this, dumper, statusText);
 		Thread.setDefaultUncaughtExceptionHandler(new UCExceptionHandler(dumper));
 	}
 
