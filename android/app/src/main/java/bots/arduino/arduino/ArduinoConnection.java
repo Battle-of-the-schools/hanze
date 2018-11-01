@@ -26,6 +26,7 @@ public class ArduinoConnection {
 
 	private UsbDeviceConnection connection;
 	private UsbDevice device;
+	private UsbSerialDevice serialPort;
 	private Activity context;
 	private boolean firstTry = true, wasOpened = false;
 	private Dumper dumper;
@@ -110,7 +111,7 @@ public class ArduinoConnection {
 		dumper.dump(device.getDeviceName());
 		dumper.dump(device.toString());
 
-		UsbSerialDevice serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
+		serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
 		if(serialPort != null)
 		{
 			dumper.dump("serialport");
@@ -137,6 +138,9 @@ public class ArduinoConnection {
 
 	public boolean writeString(String str) {
 
+		if (serialPort == null) return false;
+
+		serialPort.write(str.getBytes());
 		return true;
 	}
 

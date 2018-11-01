@@ -15,13 +15,13 @@ void loop()
 //    digitalWrite(LED_BUILTIN, input == "1" ? HIGH : LOW);
 //  }
 
-  Serial.println("hoi");
+//  Serial.println("hoi");
+//
+//  delay(1000);
+//  
+//  Serial.println("doei");
+//
+//  delay(3000);
 
-  delay(100);
-  
-  Serial.println("doei");
-
-  delay(100);
-
-//  Serial.print(Serial.readString());
+  Serial.print(Serial.readString());
 }
