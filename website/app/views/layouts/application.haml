@@ -10,25 +10,27 @@
       = csrf_meta_tags
       = csp_meta_tag
       %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+      -# %link{:crossorigin => "", :href => "https://unpkg.com/leaflet@1.3.4/dist/leaflet.css", :integrity => "sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==", :rel => "stylesheet"}/
+      -# %script{:crossorigin => "", :integrity => "sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==", :src => "https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"}
       = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
       = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-      %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCc8w0iefwxQLq2GJyEAvXGgF41RGwsqz4&callback=initMap"}
     %body{:class => ("home" if current_page?(root_path))}
-      %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-        = link_to('Home', root_path, :class => "navbar-brand")
-        %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
-          %span.navbar-toggler-icon
-        #navbarSupportedContent.collapse.navbar-collapse
-          - if caretaker_signed_in?
-            %ul.navbar-nav.mr-auto
-              %li.nav-item= link_to('Berichten', messages_path, :class => "nav-link")
-          %ul.navbar-nav.ml-auto
+      .nav-outer
+        %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+          = link_to('Home', root_path, :class => "navbar-brand")
+          %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+            %span.navbar-toggler-icon
+          #navbarSupportedContent.collapse.navbar-collapse
             - if caretaker_signed_in?
-              %li.nav-item= link_to('My Account', edit_caretaker_registration_path, :class => "nav-link")
-              %li.nav-item= link_to("Sign out", destroy_caretaker_session_path, :class => "nav-link", :method => :delete)
-            - else
-              %li.nav-item= link_to('Login', new_caretaker_session_path, :class => "nav-link")
-              %li.nav-item= link_to('Register', new_caretaker_registration_path, :class => "nav-link")
+              %ul.navbar-nav.mr-auto
+                %li.nav-item= link_to('Berichten', messages_path, :class => "nav-link")
+            %ul.navbar-nav.ml-auto
+              - if caretaker_signed_in?
+                %li.nav-item= link_to('My Account', edit_caretaker_registration_path, :class => "nav-link")
+                %li.nav-item= link_to("Sign out", destroy_caretaker_session_path, :class => "nav-link", :method => :delete)
+              - else
+                %li.nav-item= link_to('Login', new_caretaker_session_path, :class => "nav-link")
+                %li.nav-item= link_to('Register', new_caretaker_registration_path, :class => "nav-link")
 
       - if notice
         %p.notice= notice

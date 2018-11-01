@@ -1,7 +1,7 @@
-%h1 Listing messages
 
 .row
   .col-md-6
+    %h1 Listing messages
     - @messages.each do |message|
       .message-item
         %b= message.message
@@ -9,7 +9,15 @@
         %td= link_to 'Show', message
         %td= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }
   .col-md-6
-    = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=52.3,6.3&markers=52.3,6.3&zoom=7&size=640x400&key=AIzaSyCaN7hW0iQryL5A2wqtP2FPkc4xbiiXG7M"
+    #map-overview
 %br
 
-= link_to 'New Message', new_message_path
+:javascript
+  var mymap = L.map('map-overview').setView([51.505, -0.09], 13);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1IjoibG9zb3MiLCJhIjoiY2pueXhwZ3RvMDFzdzNrbXFicnlmY3Q1YiJ9.ixxDbuWyXhWX4PY4qt07ZA', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: 'your.mapbox.access.token'
+  }).addTo(mymap);

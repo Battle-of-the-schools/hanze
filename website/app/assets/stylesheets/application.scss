@@ -132,3 +132,15 @@ p { font-size: 18px; }
 .btn-ghost {
     border: 2px solid green;
 }
+
+
+#map-overview {
+    position: fixed;
+    height: 100vh;
+    width: 50%;
+    top: 0;
+}
+
+nav {
+    z-index: 99;
+}
