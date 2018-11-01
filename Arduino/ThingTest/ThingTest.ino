@@ -66,7 +66,7 @@ void loop() {
     }
     
   if (buttonPressed && !lastButtonState) {
-    debugSerial.println("-- HELP");
+    //debugSerial.println("-- HELP");
     String outStr = "HELP";
     outStr.concat(',');
     outStr.concat(String(flat));
