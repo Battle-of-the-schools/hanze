@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -94,9 +95,12 @@ public class ArduinoConnection {
 		@Override
 		public void onReceivedData(byte[] arg0)
 		{
-
-			throw new RuntimeException("received");
-
+			try {
+				String str = new String(arg0, "UTF-8");
+				dumper.dump(str);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 	};
 
