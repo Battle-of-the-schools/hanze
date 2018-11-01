@@ -7,9 +7,13 @@
     android:background="@color/colorPrimary"
     tools:context=".activities.BodyActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ImageView
-        android:onClick="chest"
         android:id="@+id/imageView"
         android:layout_width="129dp"
         android:layout_height="137dp"
@@ -19,6 +23,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="chest"
         android:src="@drawable/chest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +33,6 @@
         app:layout_constraintVertical_bias="0.33" />
 
     <ImageView
-        android:onClick="head"
         android:id="@+id/imageView2"
         android:layout_width="51dp"
         android:layout_height="74dp"
@@ -36,53 +40,54 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:onClick="head"
         android:src="@drawable/head"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView" />
 
     <ImageView
-        android:onClick="leftArm"
         android:id="@+id/imageView3"
         android:layout_width="71dp"
         android:layout_height="198dp"
         android:layout_marginEnd="103dp"
         android:layout_marginRight="103dp"
         android:layout_marginTop="12dp"
+        android:onClick="leftArm"
         android:src="@drawable/leftarm"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
-        android:onClick="rightArm"
         android:id="@+id/imageView4"
         android:layout_width="91dp"
         android:layout_height="199dp"
         android:layout_marginLeft="94dp"
         android:layout_marginStart="94dp"
         android:layout_marginTop="12dp"
+        android:onClick="rightArm"
         android:src="@drawable/rightarm"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
-        android:onClick="leftLeg"
         android:id="@+id/imageView5"
         android:layout_width="46dp"
         android:layout_height="256dp"
         android:layout_marginTop="137dp"
+        android:onClick="leftLeg"
         android:src="@drawable/leftleg"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
-        android:onClick="rightLeg"
         android:id="@+id/imageView6"
         android:layout_width="56dp"
         android:layout_height="249dp"
         android:layout_marginLeft="36dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="4dp"
+        android:onClick="rightLeg"
         android:src="@drawable/rightleg"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
