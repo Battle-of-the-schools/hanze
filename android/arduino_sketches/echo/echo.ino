@@ -5,14 +5,20 @@ void setup()
 }
 void loop()
 {
-  String input = Serial.readString();
+//  String input = Serial.readString();
+//
+//  if (input.length() > 0) {
+//
+//    Serial.print(input);
+//
+//    digitalWrite(LED_BUILTIN, input == "1" ? HIGH : LOW);
+//  }
 
-  if (input.length() > 0) {
+  Serial.print("hoi");
 
-    Serial.print(input);
-
-    digitalWrite(LED_BUILTIN, input == "1" ? HIGH : LOW);
-  }
+  delay(100);
   
-  
+  Serial.print("doei");
+
+  delay(100);
 }

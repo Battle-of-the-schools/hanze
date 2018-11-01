@@ -16,12 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
+		Dumper dumper = new Dumper(this);
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		statusText = this.findViewById(R.id.status_text);
-		arduinoConnection = new ArduinoConnection(this, statusText);
-		Thread.setDefaultUncaughtExceptionHandler(new UCExceptionHandler(this));
+		arduinoConnection = new ArduinoConnection(this, dumper);
+		Thread.setDefaultUncaughtExceptionHandler(new UCExceptionHandler(dumper));
 	}
 
 	boolean ledOn = false;
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 		arduinoConnection.writeString(ledOn ? "1" : "0");
 
 		Toast.makeText(this, ledOn ? "led on" : "led off", Toast.LENGTH_LONG).show();
-		throw new RuntimeException("bla");
 	}
 
 }

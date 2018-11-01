@@ -1,26 +1,27 @@
 package bots.arduino.arduino;
 
-import android.content.Context;
+import android.app.Activity;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.physicaloid.lib.Physicaloid;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import bots.arduino.Dumper;
 
 public class ArduinoConnection {
 
 	private Physicaloid physicaloid;
-	private Context context;
+	private Activity context;
 	private boolean firstTry = true, wasOpened = false;
+	private Dumper dumper;
 
-	private TextView tempTextView;
-
-	public ArduinoConnection(Context context, TextView textView) {
+	public ArduinoConnection(Activity context, Dumper dumper) {
 
 		this.context = context;
-		this.tempTextView = textView;
+		this.dumper = dumper;
 		reset();
 		startReading();
 
@@ -58,21 +59,34 @@ public class ArduinoConnection {
 	}
 
 	private void startReading() {
-		new Thread(() -> {
-			while (true) {
-
-				Physicaloid p = physicaloid;
-				if (p == null || !p.isOpened())
-					continue;
-
-				byte[] buf = new byte[1];
-
-				p.read(buf, buf.length);
-				String str = new String(buf);
-				if (str.length() > 0)
-					tempTextView.setText(str);
-			}
-		}).start();
+		physicaloid.addReadListener(size -> {
+			if (size == 0) return;
+			byte[] buf = new byte[size];
+			physicaloid.read(buf, size);
+			try {
+				String readStr = new String(buf, "UTF-8");
+				dumper.dump(readStr);
+			} catch (UnsupportedEncodingException e) {}
+		});
+//		final Activity context = this.context;
+//		new Thread(() -> {
+//			StringBuilder s = new StringBuilder();
+//			while (true) {
+//
+//				Physicaloid p = physicaloid;
+//				if (p == null || !p.isOpened())
+//					continue;
+//
+//				byte[] buf = new byte[1];
+//				p.read(buf, buf.length);
+//				String str = new String(buf);
+//				if (str.equals("1"))
+//					s.append(str);
+//					context.runOnUiThread(() -> tempTextView.setText(s));
+//
+//				p.addReadListener()
+//			}
+//		}).start();
 	}
 
 	public boolean writeString(String str) {
