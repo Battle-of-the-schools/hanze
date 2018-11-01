@@ -6,7 +6,7 @@
 #define button 8
 
 const char *appEui = "70B3D57ED0013EDC";
-const char *appKey = "609820B02340A427E7E7D47BCB093A22";
+const char *appKey = "A008F76AC619C1610144F4F8FFFD454E";
 
 bool buttonPressed = false;
 bool lastButtonState = false;

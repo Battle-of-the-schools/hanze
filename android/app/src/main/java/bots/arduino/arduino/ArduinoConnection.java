@@ -47,14 +47,19 @@ public class ArduinoConnection {
 					@Override
 					public void run() {
 
+						// This snippet will open the first usb device connected, excluding usb root hubs
+						UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+						HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
+
+						if (usbDevices.size() == 0){
+							connection = null;
+							device = null;
+							serialPort = null;
+						}
+
 						if (connection != null && device != null)
 							return;
 
-						// This snippet will open the first usb device connected, excluding usb root hubs
-						UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
-
-
-						HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
 						dumper.dump("nr of devices" + usbDevices.size());
 						if(!usbDevices.isEmpty())
 						{
