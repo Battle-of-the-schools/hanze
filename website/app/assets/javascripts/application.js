@@ -14,3 +14,30 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+(function() {
+  var markersArray, placeMarkerAndPanTo;
+
+  markersArray = [];
+
+  window.initMap = function() {
+    return map.addListener('click', function(e) {
+      placeMarkerAndPanTo(e.latLng, map);
+      return updateFields(e.latLng);
+    });
+  };
+
+  placeMarkerAndPanTo = function(latLng, map) {
+    var marker;
+    while (markersArray.length) {
+      markersArray.pop().setMap(null);
+    }
+    marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    map.panTo(latLng);
+    return markersArray.push(marker);
+  };
+
+}).call(this);

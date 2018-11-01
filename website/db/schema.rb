@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_31_122015) do
+ActiveRecord::Schema.define(version: 2018_10_31_145810) do
 
   create_table "caretakers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2018_10_31_122015) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_caretakers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_caretakers_on_reset_password_token", unique: true
   end
@@ -29,6 +31,8 @@ ActiveRecord::Schema.define(version: 2018_10_31_122015) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "longitude"
+    t.float "latitude"
   end
 
 end

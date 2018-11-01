@@ -1,0 +1,30 @@
+.image-placeholders {
+    position: relative;
+    height: 100vh;
+}
+
+.image-placeholder {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 5px solid green;
+    border-radius: 20px;
+    position: absolute;
+}
+
+.image-placeholder.first {
+    top: 40%;
+}
+
+.image-placeholder.second {
+    top: 25%;
+    left: 34%;
+}
+
+.image-placeholder.thirth {
+    top: 41%;
+    left: 70%;
+}

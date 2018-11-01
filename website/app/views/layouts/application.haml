@@ -1,33 +1,41 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Website
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-      = link_to('Home', root_path, :class => "navbar-brand")
-      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
-        %span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-        - if caretaker_signed_in?
-          %ul.navbar-nav.mr-auto
-            %li.nav-item= link_to('Berichten', messages_path, :class => "nav-link")
-        %ul.navbar-nav.ml-auto
+- if request.format.json? 
+  = yield
+- else 
+  !!!
+  %html
+    %head
+      %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+      %title Website
+      %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap"}
+      %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro", :rel => "stylesheet"}/
+      = csrf_meta_tags
+      = csp_meta_tag
+      %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+      = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+      = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %body{:class => ("home" if current_page?(root_path))}
+      %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+        = link_to('Home', root_path, :class => "navbar-brand")
+        %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
           - if caretaker_signed_in?
-            %li.nav-item= link_to('My Account', edit_caretaker_registration_path, :class => "nav-link")
-            %li.nav-item= link_to("Sign out", destroy_caretaker_session_path, :class => "nav-link", :method => :delete)
-          - else
-            %li.nav-item= link_to('Login', new_caretaker_session_path, :class => "nav-link")
-            %li.nav-item= link_to('Register', new_caretaker_registration_path, :class => "nav-link")
+            %ul.navbar-nav.mr-auto
+              %li.nav-item= link_to('Berichten', messages_path, :class => "nav-link")
+          %ul.navbar-nav.ml-auto
+            - if caretaker_signed_in?
+              %li.nav-item= link_to('My Account', edit_caretaker_registration_path, :class => "nav-link")
+              %li.nav-item= link_to("Sign out", destroy_caretaker_session_path, :class => "nav-link", :method => :delete)
+            - else
+              %li.nav-item= link_to('Login', new_caretaker_session_path, :class => "nav-link")
+              %li.nav-item= link_to('Register', new_caretaker_registration_path, :class => "nav-link")
 
-    - if notice
-      %p.notice= notice
-    - if alert
-      %p.alert= alert
+      - if notice
+        %p.notice= notice
+      - if alert
+        %p.alert= alert
 
-    .container
-      = yield
+      .container
+        = yield 
+        
+      .background-hack
