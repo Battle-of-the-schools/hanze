@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_31_145810) do
+ActiveRecord::Schema.define(version: 2018_11_01_133326) do
 
   create_table "caretakers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(version: 2018_10_31_145810) do
     t.datetime "updated_at", null: false
     t.float "longitude"
     t.float "latitude"
+    t.string "downlink_url"
+    t.string "app_id"
+    t.string "dev_id"
   end
 
 end

@@ -5,7 +5,7 @@
     - @messages.each do |message|
       .message-item
         %b= message.message
-        %span= time_ago_in_words(message.created_at)
+        %span= time_ago_in_words(message.created_at).to_s + " ago"
         %td= link_to 'Show', message
         %td= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }
   .col-md-6

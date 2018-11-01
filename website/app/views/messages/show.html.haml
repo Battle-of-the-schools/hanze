@@ -1,17 +1,19 @@
 %p#notice= notice
 
 %p
-  %b Id:
+  %b Message:
   = @message.message
 %p
   %b Location:
   = @message.location
+
 %p
   %b created_at:
   = @message.created_at
 %p
   %b updated_at:
   = @message.updated_at
+
 %p
   %b longitude:
   = @message.longitude
@@ -19,8 +21,23 @@
   %b latitude:
   = @message.latitude
 
-= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@message.latitude},#{@message.longitude}&markers=#{@message.latitude},#{@message.longitude}&zoom=7&size=640x400&key=AIzaSyCaN7hW0iQryL5A2wqtP2FPkc4xbiiXG7M"
+%p
+  %b Downlink_url:
+  = @message.downlink_url
+%p
+  %b App_id:
+  = @message.app_id
+%p
+  %b Dev_id:
+  = @message.dev_id
 
+-# = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=53.20393,6.52751&markers=53.20393,6.52751&zoom=7&size=640x400&key=nBxnglIWacwoX3XNZapZcxP9Orw="
+-# = image_tag 'http://maps.googleapis.com/maps/api/staticmap?center='+@message.latitude.to_s+','+@message.longitude.to_s+'&markers='+@message.latitude.to_s+','+@message.longitude.to_s+'&zoom=7&size=640x400&key=nBxnglIWacwoX3XNZapZcxP9Orw'
+
+
+#map.map
+
+%br
 
 = link_to 'Edit', edit_message_path(@message)
 \|

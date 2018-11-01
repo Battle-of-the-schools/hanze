@@ -15,29 +15,49 @@
 //= require turbolinks
 //= require_tree .
 
-(function() {
-  var markersArray, placeMarkerAndPanTo;
 
-  markersArray = [];
 
-  window.initMap = function() {
-    return map.addListener('click', function(e) {
-      placeMarkerAndPanTo(e.latLng, map);
-      return updateFields(e.latLng);
-    });
-  };
+// AIzaSyCc8w0iefwxQLq2GJyEAvXGgF41RGwsqz4
 
-  placeMarkerAndPanTo = function(latLng, map) {
-    var marker;
-    while (markersArray.length) {
-      markersArray.pop().setMap(null);
-    }
-    marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-    map.panTo(latLng);
-    return markersArray.push(marker);
-  };
+// (function() {
+//   var markersArray, placeMarkerAndPanTo;
 
-}).call(this);
+//   markersArray = [];
+
+//   window.initMap = function() {
+//     return map.addListener('click', function(e) {
+//       placeMarkerAndPanTo(e.latLng, map);
+//       return updateFields(e.latLng);
+//     });
+//   };
+
+//   placeMarkerAndPanTo = function(latLng, map) {
+//     var marker;
+//     while (markersArray.length) {
+//       markersArray.pop().setMap(null);
+//     }
+//     marker = new google.maps.Marker({
+//       position: latLng,
+//       map: map
+//     });
+//     map.panTo(latLng);
+//     return markersArray.push(marker);
+//   };
+
+// }).call(this);
+
+
+function initMap() {
+  var myLatLng = {lat: -25.363, lng: 131.044};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
+  });
+}

@@ -6,13 +6,13 @@
     %head
       %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
       %title Website
-      %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap"}
       %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro", :rel => "stylesheet"}/
       = csrf_meta_tags
       = csp_meta_tag
       %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
       = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
       = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+      %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCc8w0iefwxQLq2GJyEAvXGgF41RGwsqz4&callback=initMap"}
     %body{:class => ("home" if current_page?(root_path))}
       %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
         = link_to('Home', root_path, :class => "navbar-brand")
