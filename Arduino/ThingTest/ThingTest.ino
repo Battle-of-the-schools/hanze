@@ -38,9 +38,12 @@ void setup() {
   //debugSerial.println("-- JOIN");
   ttn.join(appEui, appKey);
   //debugSerial.println("-- LOOP"); // geeft aan de de loop begint
+
+  
 }
 
 String inData = "";
+unsigned long lastPollTime = 0;
 
 void loop() {
   buttonHandler();
@@ -64,7 +67,13 @@ void loop() {
             inData = ""; // Clear recieved buffer
         }
     }
-    
+
+  unsigned long timee = millis();
+  if (timee - lastPollTime > 10000) {
+    lastPollTime = timee;
+    ttn.poll();
+  }
+  
   if (buttonPressed && !lastButtonState) {
     //debugSerial.println("-- HELP");
     String outStr = "HELP";
