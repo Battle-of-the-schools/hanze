@@ -8,11 +8,11 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -47,20 +47,23 @@ public class ArduinoConnection {
 					@Override
 					public void run() {
 
+						// This snippet will open the first usb device connected, excluding usb root hubs
+						UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+						HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
+
+						if (usbDevices.size() == 0) {
+							connection = null;
+							device = null;
+							serialPort = null;
+						}
+
 						if (connection != null && device != null)
 							return;
 
-						// This snippet will open the first usb device connected, excluding usb root hubs
-						UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
-
-
-						HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
-						dumper.dump("nr of devices" + usbDevices.size());
-						if(!usbDevices.isEmpty())
-						{
+//						dumper.dump("nr of devices" + usbDevices.size());
+						if (!usbDevices.isEmpty()) {
 							boolean keep = true;
-							for(Map.Entry<String, UsbDevice> entry : usbDevices.entrySet())
-							{
+							for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
 								device = entry.getValue();
 								usbManager.requestPermission(
 										device,
@@ -69,12 +72,12 @@ public class ArduinoConnection {
 								// We are supposing here there is only one device connected and it is our serial device
 								connection = usbManager.openDevice(device);
 								keep = false;
-								dumper.dump("connection? " + connection);
+//								dumper.dump("connection? " + connection);
 
 								if (connection != null)
 									startReading();
 
-								if(!keep)
+								if (!keep)
 									break;
 							}
 						}
@@ -90,34 +93,64 @@ public class ArduinoConnection {
 		wasOpened = false;
 	}
 
+	private static final String CONTENT_LN = "Content-Length: ";
+	private String buffer = "";
+	private int expectedLength = 0;
+
 	// A callback for received data must be defined
-	private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback()
-	{
+	private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() {
+
 		@Override
-		public void onReceivedData(byte[] arg0)
-		{
-			try {
-				String str = new String(arg0, "UTF-8");
-				dumper.dump(str);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+		public void onReceivedData(byte[] arg0) {
+			String str = new String(arg0);
+			buffer += str;
+
+			if (expectedLength == 0) {
+
+				String shit = buffer.split(CONTENT_LN)[0];
+				buffer = buffer.substring(shit.length());
+
+				context.runOnUiThread(() -> temp.setText(buffer));
+				if (buffer.contains("\r\n") && buffer.startsWith(CONTENT_LN)) {
+					// found start of content
+
+					String lnStr = buffer.split("\r\n")[0];
+					if (lnStr == null) return;
+					lnStr = lnStr.split(": ")[1];
+					expectedLength = Integer.parseInt(lnStr);
+					buffer = buffer.split("\r\n")[1];
+				}
+
 			}
+
+			if (buffer.length() >= expectedLength && expectedLength > 0) {
+
+				// got all content
+				String json = buffer.substring(0, expectedLength);
+				context.runOnUiThread(() -> Toast.makeText(context, json, Toast.LENGTH_LONG).show());
+//				dumper.dump(json);
+
+				onJsonMessage(json);
+
+				buffer = buffer.substring(expectedLength);
+				expectedLength = 0;
+			}
+
+
 		}
 	};
 
 
 	private void startReading() {
 
-		dumper.dump(device.getDeviceName());
-		dumper.dump(device.toString());
+//		dumper.dump(device.getDeviceName());
+//		dumper.dump(device.toString());
 
 		serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
-		if(serialPort != null)
-		{
-			dumper.dump("serialport");
-			if(serialPort.open())
-			{
-				dumper.dump("serialport open");
+		if (serialPort != null) {
+//			dumper.dump("serialport");
+			if (serialPort.open()) {
+//				dumper.dump("serialport open");
 				// Devices are opened with default values, Usually 9600,8,1,None,OFF
 				// CDC driver default values 115200,8,1,None,OFF
 				serialPort.setBaudRate(9600);
@@ -126,24 +159,30 @@ public class ArduinoConnection {
 				serialPort.setParity(UsbSerialInterface.PARITY_NONE);
 				serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
 				serialPort.read(mCallback);
-			}else
-			{
+			} else {
 				// Serial port could not be opened, maybe an I/O error or it CDC driver was chosen it does not really fit
 			}
-		}else
-		{
+		} else {
 			// No driver for given device, even generic CDC driver could not be loaded
 		}
 	}
 
-	public boolean writeString(String str) {
-
-		if (serialPort == null) return false;
-
-		serialPort.write(str.getBytes());
-		return true;
+	private void onJsonMessage(String json) {
+		// todo
 	}
 
+	public boolean writeString(String str) {
+
+		if (serialPort == null) {
+			dumper.dump("no serial port");
+			return false;
+		}
+
+		str += "\n";
+		serialPort.write(str.getBytes());
+		dumper.dump(str);
+		return true;
+	}
 
 
 }

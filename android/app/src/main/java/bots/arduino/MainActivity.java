@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import bots.arduino.arduino.ArduinoConnection;
 
@@ -27,15 +26,9 @@ public class MainActivity extends AppCompatActivity {
 		Thread.setDefaultUncaughtExceptionHandler(new UCExceptionHandler(dumper));
 	}
 
-	boolean ledOn = false;
 
 	public void testButton(View view) {
-
-
-		ledOn = !ledOn;
-		arduinoConnection.writeString(ledOn ? "1" : "0");
-
-		Toast.makeText(this, ledOn ? "led on" : "led off", Toast.LENGTH_LONG).show();
+		arduinoConnection.writeString("{'hallo_timo': 4555435, 'pizza': [4, 5, 5, 6]}");
 	}
 
 }

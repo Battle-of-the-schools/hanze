@@ -6,7 +6,7 @@
 #define button 8
 
 const char *appEui = "70B3D57ED0013EDC";
-const char *appKey = "609820B02340A427E7E7D47BCB093A22";
+const char *appKey = "A008F76AC619C1610144F4F8FFFD454E";
 
 bool buttonPressed = false;
 bool lastButtonState = false;
@@ -38,9 +38,12 @@ void setup() {
   //debugSerial.println("-- JOIN");
   ttn.join(appEui, appKey);
   //debugSerial.println("-- LOOP"); // geeft aan de de loop begint
+
+  
 }
 
 String inData = "";
+unsigned long lastPollTime = 0;
 
 void loop() {
   buttonHandler();
@@ -64,8 +67,14 @@ void loop() {
             inData = ""; // Clear recieved buffer
         }
     }
-    
-  if (!buttonPressed && !lastButtonState) {
+
+  unsigned long timee = millis();
+  if (timee - lastPollTime > 10000) {
+    lastPollTime = timee;
+    ttn.poll();
+  }
+  
+  if (buttonPressed && !lastButtonState) {
     //debugSerial.println("-- HELP");
     String outStr = "HELP";
     outStr.concat(',');
@@ -82,7 +91,8 @@ void loop() {
 }
 
 void message(const byte* payload, int length, int port) {
-  //debugSerial.println("-- MESSAGE");
+  debugSerial.print("Content-Length: ");
+  debugSerial.println(length);
   debugSerial.println(String((char*) payload));
 }
 
