@@ -1,0 +1,10 @@
+.message-item {
+    margin-left: 30px;
+
+    &:before {
+        content: "";
+        background-color: red;
+        width: 20px;
+        height: 20px;
+    }
+}

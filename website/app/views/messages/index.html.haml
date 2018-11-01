@@ -1,23 +1,15 @@
 %h1 Listing messages
 
-%table
-  %thead
-    %tr
-      %th Message
-      %th Location
-      %th
-      %th
-      %th
-
-  %tbody
+.row
+  .col-md-6
     - @messages.each do |message|
-      %tr
-        %td= message.message
-        %td= message.location
+      .message-item
+        %b= message.message
+        %span= time_ago_in_words(message.created_at)
         %td= link_to 'Show', message
-        %td= link_to 'Edit', edit_message_path(message)
-        %td= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' }
-
+        %td= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }
+  .col-md-6
+    = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=52.3,6.3&markers=52.3,6.3&zoom=7&size=640x400&key=AIzaSyCaN7hW0iQryL5A2wqtP2FPkc4xbiiXG7M"
 %br
 
 = link_to 'New Message', new_message_path

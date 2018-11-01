@@ -92,6 +92,7 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.25)
+    geocoder (1.5.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -242,6 +243,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-bootstrap-views (~> 1.0)
+  geocoder
   haml-rails (~> 1.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)

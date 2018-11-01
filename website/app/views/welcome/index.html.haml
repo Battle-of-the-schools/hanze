@@ -1,2 +1,17 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+.row
+    .col-md-6
+        %h1.mt1 LoSOS
+        %p.mb0 Emergancy networkover long distance, 
+        %p.mb0 using LoRaWAN Network.
+        %p.mb1 Saving lives that matter.
+        = link_to('Login', new_caretaker_session_path, :class => "btn btn-primary")
+        = link_to('Register', new_caretaker_registration_path, :class => "btn btn-ghost") 
+    .col-md-6
+        .image-placeholders
+            .image-placeholder.second
+                %img{src: "https://via.placeholder.com/150"}
+            .image-placeholder.first
+                %img{src: "https://via.placeholder.com/150"}
+            .image-placeholder.thirth
+                %img{src: "https://via.placeholder.com/150"}
+
