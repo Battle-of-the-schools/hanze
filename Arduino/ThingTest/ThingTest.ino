@@ -90,7 +90,8 @@ void loop() {
 }
 
 void message(const byte* payload, int length, int port) {
-  //debugSerial.println("-- MESSAGE");
+  debugSerial.print("Content-Length: ");
+  debugSerial.println(length);
   debugSerial.println(String((char*) payload));
 }
 
