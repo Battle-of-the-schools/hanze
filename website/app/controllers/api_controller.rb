@@ -1,5 +1,4 @@
 class ApiController < ApplicationController
-    require "uri"
     require "net/http"
 
     # skip_before_action :verify_authenticity_token, except: [*]
@@ -27,7 +26,10 @@ class ApiController < ApplicationController
             @message.save
 
             request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64("Er zijn nog "+Message.count.to_s+" Wachtende voor u")}
-            Net::HTTP.post_form(URI.parse(params["downlink_url"]), request_params)
+            # url = "https://ptsv2.com/t/4vz8n-1541087003/post"
+            url = params["downlink_url"]
+            
+            JSON.load `curl -H 'Content-Type:application/json' -H 'Accept:application/json' -X POST #{url} -d '#{request_params.to_json}'`
         end
     end
 end
