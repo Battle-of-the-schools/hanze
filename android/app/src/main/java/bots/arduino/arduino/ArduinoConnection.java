@@ -17,11 +17,10 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import bots.arduino.App;
 import bots.arduino.Dumper;
 
 public class ArduinoConnection {
-
-//	private Physicaloid physicaloid;
 
 	private UsbDeviceConnection connection;
 	private UsbDevice device;
@@ -93,7 +92,7 @@ public class ArduinoConnection {
 	private String buffer = "";
 	private int expectedLength = 0;
 
-	// A callback for received data must be defined
+	// A callback for received data:
 	private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() {
 
 		@Override
@@ -125,7 +124,7 @@ public class ArduinoConnection {
 				context.runOnUiThread(() -> Toast.makeText(context, json, Toast.LENGTH_LONG).show());
 //				dumper.dump(json);
 
-				onJsonMessage(json);
+				((App) context.getApplication()).handleJsonMessage(json);
 
 				buffer = buffer.substring(expectedLength);
 				expectedLength = 0;
@@ -146,24 +145,15 @@ public class ArduinoConnection {
 //			dumper.dump("serialport");
 			if (serialPort.open()) {
 //				dumper.dump("serialport open");
-				// Devices are opened with default values, Usually 9600,8,1,None,OFF
-				// CDC driver default values 115200,8,1,None,OFF
+
 				serialPort.setBaudRate(9600);
 				serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
 				serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
 				serialPort.setParity(UsbSerialInterface.PARITY_NONE);
 				serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
 				serialPort.read(mCallback);
-			} else {
-				// Serial port could not be opened, maybe an I/O error or it CDC driver was chosen it does not really fit
 			}
-		} else {
-			// No driver for given device, even generic CDC driver could not be loaded
 		}
-	}
-
-	private void onJsonMessage(String json) {
-		// todo
 	}
 
 	public boolean writeString(String str) {
