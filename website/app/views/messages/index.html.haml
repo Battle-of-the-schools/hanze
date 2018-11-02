@@ -1,11 +1,11 @@
 
 .row
   .col-md-6
-    %h2 Messages
+    %h2 Notifications
     - @messages.each do |message|
       .message-item{id: "message-#{message.id}"}
         .row
-          .col-sm-9
+          .col-sm-9.message-colored-item
             = link_to "#{message.message}", message, class: "title"
             %br
             = time_ago_in_words(message.created_at).to_s + " ago"
@@ -15,7 +15,7 @@
 %br
 
 :javascript
-  var mymap = L.map('map-overview').setView([18.546391, -73.342789], 8);
+  var mymap = L.map('map-overview').setView([19.171188, -73.0], 8);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1IjoibG9zb3MiLCJhIjoiY2pueXhwZ3RvMDFzdzNrbXFicnlmY3Q1YiJ9.ixxDbuWyXhWX4PY4qt07ZA', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -23,3 +23,36 @@
       id: 'mapbox.streets',
       accessToken: 'your.mapbox.access.token'
   }).addTo(mymap);
+
+
+  var redMarker = new L.DivIcon({
+    className: 'help-marker red',
+    html: '<div class="help-marker-inner"></div><div class="help-marker-inner2"></div>'
+  })
+
+  var orangeMarker = new L.DivIcon({
+    className: 'help-marker orange',
+    html: '<div class="help-marker-inner"></div>'
+  })
+
+  var yellowMarker = new L.DivIcon({
+    className: 'help-marker yellow',
+    html: '<div class="help-marker-inner"></div>'
+  })
+
+  var data = #{raw json_escape(@messages.to_json)};
+
+  var markers = [];
+  for(var i=0; i < data.length; i++) {
+    latitude = data[i]["latitude"];
+    longitude = data[i]["longitude"];
+    if(longitude > 1 && latitude > 1){
+      markers.push(L.marker([latitude, longitude], {icon: redMarker}));
+    }
+  }
+  for (i = 0; i < markers.length; i++) {
+      markers[i].addTo(mymap);
+  }
+
+-# var lc = document.getElementsByClassName('leaflet-control-layers');
+-# lc[0].style.visibility = 'hidden';

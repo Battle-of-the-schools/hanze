@@ -55,7 +55,6 @@ body.home:after {
     background-repeat-y: no-repeat;
     background-position-y: bottom;
     background-position-x: 25%;
-    animation: naam 10s infinite;
 }
 
 body.home .background-hack {
@@ -65,7 +64,6 @@ body.home .background-hack {
     z-index: -9999;
     width: 100%;
     background-color: #005d00; 
-    animation: naam 10s infinite;
 }
 
 // body.home .background-hack { background-color: #005d00; }
@@ -93,6 +91,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     letter-spacing: 1px;
 }
 
+.btn {
+    font-weight: bolder;
+    letter-spacing: 1px;    
+}
+
 
 h1, .h1 { font-size: 6.5em; color: white; }
 h2, .h2 { font-size: 5em; }
@@ -105,8 +108,31 @@ p { font-size: 18px; }
 .c-white { color: #fff; }
 .c-primary { color: $color_primary; }
 
+
+.welcome {
+    p {
+        color: white;
+        font-size: 22px;
+    }
+
+    .btn {
+        font-size: 22px;
+    }
+    .btn-primary {
+        color: $color_primary;
+        background-color: #ffffffa0;
+        border-color: transparent;
+        margin-right: 20px;
+    }
+    .btn-ghost {
+        border-color: white;
+        color: white;
+    }
+}
+
+
 .notice {
-    background-color: yellow;
+    background-color: #e7e7e770;
     color: red;
 }
 
@@ -121,11 +147,16 @@ p { font-size: 18px; }
 
 .panel{
     background-color: white;
-    border: 5px solid $color_primary
+    border: 5px solid $color_primary;
+
+    h1, h2, h3 {
+        text-align: center;
+    }
 }
 
 .btn {
     padding: 10px 30px;
+    border-radius: 10px;
 }
 
 .btn-primary,
@@ -155,4 +186,11 @@ nav {
 
 .leaflet-control-container {
     display: none !important;
+}
+
+
+.message-colored-item {
+    background-color: #d8d8d8;
+    box-shadow: 4px -4px 10px 0px #5c5c5c;
+    padding: 20px;
 }

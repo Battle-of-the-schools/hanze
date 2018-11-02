@@ -1,0 +1,47 @@
+// .leaflet-marker-icon {
+// }
+
+.help-marker-inner,
+.help-marker-inner2 {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: alarm 1s infinite;  
+}
+
+.help-marker-inner2 {
+    animation-delay: 200ms;
+}
+
+.help-marker.red,
+.help-marker.red .help-marker-inner,
+.help-marker.red .help-marker-inner2  {
+    background-color: red;
+}
+
+.help-marker.orange,
+.help-marker.orange .help-marker-inner,
+.help-marker.orange .help-marker-inner2  {
+    background-color: orange;
+}
+
+.help-marker.yellow,
+.help-marker.yellow .help-marker-inner,
+.help-marker.yellow .help-marker-inner2  {
+    background-color: yellow;
+}
+
+.help-marker {
+    border-radius: 50%;
+}
+
+
+@keyframes alarm {
+    0% { opacity: 1; width: 10px; height: 10px;}
+    100% { opacity: 0; width: 100px; height: 100px; }
+}
