@@ -7,45 +7,43 @@
 
 %h2 Details
 
-%p
-  %b Message: diebadiebadoink bie ba boe kip kikker
-  = @message.message
-%p
-  %b Location:
-  = @message.location
+.row
+  .col-md-6
+    %p
+      %b Message:
+      = @message.message
+    %p
+      %b Location:
+      = @message.location
 
-%p
-  %b created_at:
-  = @message.created_at
-%p
-  %b updated_at:
-  = @message.updated_at
+    %p
+      %b created_at:
+      = @message.created_at
+    %p
+      %b updated_at:
+      = @message.updated_at
 
-%p
-  %b longitude:
-  = @message.longitude
-%p
-  %b latitude:
-  = @message.latitude
+    %p
+      %b longitude:
+      = @message.longitude
+    %p
+      %b latitude:
+      = @message.latitude
 
-%p
-  %b Downlink_url:
-  = @message.downlink_url
-%p
-  %b App_id:
-  = @message.app_id
-%p
-  %b Dev_id:
-  = @message.dev_id
-
-#mapid
-
+    %p
+      %b Downlink_url:
+      = @message.downlink_url
+    %p
+      %b App_id:
+      = @message.app_id
+    %p
+      %b Dev_id:
+      = @message.dev_id    
+  .col-md-6
+    #map-overview
 %br
 
 %link{:crossorigin => "", :href => "https://unpkg.com/leaflet@1.3.4/dist/leaflet.css", :integrity => "sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==", :rel => "stylesheet"}/
-
-:css
-  #mapid { height: 50vh; width: 100%; }
 
 -# = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=53.20393,6.52751&markers=53.20393,6.52751&zoom=7&size=640x400&key=nBxnglIWacwoX3XNZapZcxP9Orw="
 -# = image_tag 'http://maps.googleapis.com/maps/api/staticmap?center='+@message.latitude.to_s+','+@message.longitude.to_s+'&markers='+@message.latitude.to_s+','+@message.longitude.to_s+'&zoom=7&size=640x400&key=nBxnglIWacwoX3XNZapZcxP9Orw'
@@ -57,7 +55,7 @@
 %script{:crossorigin => "", :integrity => "sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==", :src => "https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"}
 
 :javascript
-  var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+  var mymap = L.map('map-overview').setView([12.34, 12.34], 13);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1IjoibG9zb3MiLCJhIjoiY2pueXhwZ3RvMDFzdzNrbXFicnlmY3Q1YiJ9.ixxDbuWyXhWX4PY4qt07ZA', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -65,7 +63,6 @@
       id: 'mapbox.streets',
       accessToken: 'your.mapbox.access.token'
   }).addTo(mymap);
-
   var greenIcon = L.icon({
     iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
     shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
@@ -78,8 +75,7 @@
   });
 
   var markers = [];
-  markers.push(L.marker([51.5, -0.09]));
-  markers.push(L.marker([51.51, -0.08]));
+  markers.push(L.marker([12.34, 12.34]));
   for (i = 0; i < markers.length; i++) {
       markers[i].addTo(mymap);
   }
