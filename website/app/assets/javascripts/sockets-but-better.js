@@ -31,7 +31,7 @@ setInterval(() => {
         if (div)
             div.outerHTML = html;
         else 
-            document.getElementById("deadhumans").append(html);
+            document.getElementById("deadhumans").appendChild(html);
 
     }
 
