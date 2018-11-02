@@ -33,7 +33,8 @@ public class CountdownActivity extends AppCompatActivity {
 							minutes = (app.countdown % 3600) / 60,
 							seconds = app.countdown % 60;
 
-					String str = hours + ":";
+					String str = hours< 10 ? "0" + hours : hours + "";
+					str += ":";
 					str += minutes < 10 ? "0" + minutes : minutes;
 					str += ":";
 					str += seconds < 10 ? "0" + seconds : seconds;
