@@ -26,7 +26,10 @@
         <activity android:name=".BodyActivity" />
         <activity android:name=".activities.PainActivity" />
         <activity android:name=".activities.BodyActivity" />
-        <activity android:name=".activities.CauseActivity"></activity>
+        <activity android:name=".activities.CauseActivity" />
+        <activity android:name=".activities.WaitingActivity" />
+        <activity android:name=".activities.responses.InstructionActivity" />
+        <activity android:name=".activities.responses.CountdownActivity"></activity>
     </application>
 
 </manifest>

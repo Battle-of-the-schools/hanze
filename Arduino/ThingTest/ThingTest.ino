@@ -6,9 +6,9 @@
 #define button 8
 
 const char *appEui = "70B3D57ED0013EDC";
-const char *appKey = "A008F76AC619C1610144F4F8FFFD454E";
+const char *appKey = "609820B02340A427E7E7D47BCB093A22";
 
-bool buttonPressed = false;
+bool buttonPressed = true;
 bool lastButtonState = false;
 
 //GPS
@@ -30,15 +30,12 @@ void setup() {
   // Initialize LED output pin
   pinMode(LED_BUILTIN, OUTPUT);
     
-  // Wait a maximum of 10s for Serial Monitor
-  while (!debugSerial && millis() < 10000);
-    
   //debugSerial.println("-- STATUS");
   ttn.showStatus();
   //debugSerial.println("-- JOIN");
   ttn.join(appEui, appKey);
   //debugSerial.println("-- LOOP"); // geeft aan de de loop begint
-
+  digitalWrite(LED_BUILTIN, 1); // turns on the led on pin 13 to indecade a connection between the node and the server
   
 }
 
@@ -74,7 +71,7 @@ void loop() {
     ttn.poll();
   }
   
-  if (buttonPressed && !lastButtonState) {
+  if (!buttonPressed && !lastButtonState) {
     //debugSerial.println("-- HELP");
     String outStr = "HELP";
     outStr.concat(',');
@@ -87,7 +84,6 @@ void loop() {
     outStr.getBytes(data, outStr.length());
     ttn.sendBytes(data, sizeof(data));
   }
-  ttn.poll();
 }
 
 void message(const byte* payload, int length, int port) {
