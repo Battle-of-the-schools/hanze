@@ -8,7 +8,7 @@ setInterval(() => {
 
     for (var almostDeadHuman of list) {
 
-        console.log(almostDeadHuman);
+        console.log(    );
 
         var divId = "message-" + almostDeadHuman.id;
         var div = document.getElementById(divId);
@@ -32,13 +32,11 @@ setInterval(() => {
             html: '<div class="help-marker-inner"></div><div class="help-marker-inner2"></div>'
         })
 
-        let mapOverview = document.getElementById("map-overview");
-
         div ? (() => {
             div.outerHTML = html;
         })() : (() => {
             document.getElementById("deadhumans").innerHTML += html;
-            var markertje = L.marker([latitude, longitude], {icon: redMarker})
+            var markertje = L.marker([almostDeadHuman.latitude, almostDeadHuman.longitude], {icon: redMarker})
             markertje.addto(window.map)
         })()
 
