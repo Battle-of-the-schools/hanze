@@ -41,6 +41,10 @@ $primary:       green;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 body.home:after {
     content: "";
     position: absolute;
@@ -194,4 +198,13 @@ nav {
     background-color: #d8d8d8;
     box-shadow: 4px -4px 10px 0px #5c5c5c;
     padding: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+
+nav img {
+    width: 115px;
+    margin-right: 15px;
 }

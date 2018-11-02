@@ -17,7 +17,8 @@
     %body{:class => ("home" unless current_page?(messages_path) || current_page?(new_message_path) || current_page?('/messages/1') || current_page?('/messages/2') || current_page?('/messages/3') || current_page?('/messages/4') || current_page?('/messages/5'))}
       .nav-outer
         %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-          = link_to('Home', root_path, :class => "navbar-brand")
+          = image_tag('logo-app.svg')
+          -# = link_to('Home', root_path, :class => "navbar-brand")
           %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
             %span.navbar-toggler-icon
           #navbarSupportedContent.collapse.navbar-collapse
