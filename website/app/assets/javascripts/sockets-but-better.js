@@ -18,10 +18,10 @@ setInterval(() => {
             <div class="row">
                 <div class="col-sm-9 message-colored-item">
                     <a class="title" href="/messages/${almostDeadHuman.id}">
-                        ${almostDeadHuman.message}
+                        Device ${almostDeadHuman.id}
                     </a>
                     <br>
-                    about 19e555e6565e6e56 hours ago
+                    a few minutes ago
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ setInterval(() => {
                 className: 'help-marker red',
                 html: '<div class="help-marker-inner"></div><div class="help-marker-inner2"></div>'
             })
-            
+
             var markertje = L.marker([almostDeadHuman.latitude, almostDeadHuman.longitude], {icon: redMarker})
             markertje.addTo(window.map)
         })()
