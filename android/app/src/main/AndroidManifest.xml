@@ -3,11 +3,13 @@
     package="bots.arduino">
 
     <uses-feature android:name="android.hardware.usb.host" />
-    <uses-permission android:name="android.hardware.usb.host"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.hardware.usb.host" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".BodyActivity" />
+        <activity android:name=".activities.PainActivity" />
+        <activity android:name=".activities.BodyActivity" />
+        <activity android:name=".activities.CauseActivity"></activity>
     </application>
-
 
 </manifest>

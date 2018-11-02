@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.felhr.usbserial.UsbSerialDevice;
@@ -31,13 +30,10 @@ public class ArduinoConnection {
 	private boolean firstTry = true, wasOpened = false;
 	private Dumper dumper;
 
-	private TextView temp;
-
-	public ArduinoConnection(Activity context, Dumper dumper, TextView temp) {
+	public ArduinoConnection(Activity context, Dumper dumper) {
 
 		this.context = context;
 		this.dumper = dumper;
-		this.temp = temp;
 		reset();
 
 		// start a interval that will try to connect to an Arduino
@@ -110,7 +106,6 @@ public class ArduinoConnection {
 				String shit = buffer.split(CONTENT_LN)[0];
 				buffer = buffer.substring(shit.length());
 
-				context.runOnUiThread(() -> temp.setText(buffer));
 				if (buffer.contains("\r\n") && buffer.startsWith(CONTENT_LN)) {
 					// found start of content
 
