@@ -1,4 +1,4 @@
--request_params = {"dev_id": "atenne", "confirmed": false, "payload_raw": Base64.encode64('{"response": 17, "time": 17878}')}
+-request_params = {"dev_id": "atenne", "confirmed": false, "payload_raw": Base64.encode64('{"response": 17, "time": 1800}')}
 - url = Message.last.downlink_url
 - JSON.load `curl -H 'Content-Type:application/json' -H 'Accept:application/json' -X POST #{url} -d '#{request_params.to_json}'`
 
