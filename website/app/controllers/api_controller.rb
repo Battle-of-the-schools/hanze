@@ -31,8 +31,9 @@ class ApiController < ApplicationController
 
             else
                 @mes = Message.find_by(dev_id: params["dev_id"])
-
-                    data = ActiveSupport::JSON.decode(params["payload_fields"]["message"])
+                    value = params["payload_fields"]["message"]
+                    value.sub!("'", '"')
+                    data = ActiveSupport::JSON.decode(value)
 
                     unless data["message"].nil?
                         @mes.update(message: data["message"])
