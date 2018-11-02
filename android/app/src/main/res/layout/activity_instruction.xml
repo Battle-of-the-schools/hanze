@@ -7,6 +7,12 @@
     android:background="@color/colorPrimary"
     tools:context=".activities.responses.InstructionActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="wrap_content"

@@ -14,10 +14,11 @@ public class WaitingActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_waiting);
 
 		Handler handler = new android.os.Handler();
-//		handler.postDelayed(() -> {
-//
-//			((App) this.getApplication()).handleJsonMessage("{'show': 16}");
-//
-//		}, 10000);
+		handler.postDelayed(() -> {
+
+//			((App) this.getApplication()).handleJsonMessage("{'response': 16}");
+//			((App) this.getApplication()).handleJsonMessage("{'response': 17, 'time': 1983}");
+
+		}, 10000);
 	}
 }
