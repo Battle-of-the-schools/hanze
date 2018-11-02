@@ -27,11 +27,20 @@ setInterval(() => {
         </div>
         `;
 
+        var redMarker = new L.DivIcon({
+            className: 'help-marker red',
+            html: '<div class="help-marker-inner"></div><div class="help-marker-inner2"></div>'
+        })
 
-        if (div)
+        let mapOverview = document.getElementById("map-overview");
+
+        div ? (() => {
             div.outerHTML = html;
-        else 
+        })() : (() => {
             document.getElementById("deadhumans").innerHTML += html;
+            var markertje = L.marker([latitude, longitude], {icon: redMarker})
+            markertje.addto(window.map)
+        })()
 
     }
 

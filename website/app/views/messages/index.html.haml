@@ -47,7 +47,7 @@
     latitude = data[i]["latitude"];
     longitude = data[i]["longitude"];
     if(longitude > 1 && latitude > 1){
-      markers.push(L.marker([latitude, longitude], {icon: redMarker}));
+      markers.push(L.marker([latitude, longitude], {icon: orangeMarker}));
     }
   }
   for (i = 0; i < markers.length; i++) {
