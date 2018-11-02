@@ -1,7 +1,5 @@
-%h1 Editing message
+-request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64('{"response": 17, "time": 17878}')}
+- url = Message.last.downlink_url
+- JSON.load `curl -H 'Content-Type:application/json' -H 'Accept:application/json' -X POST #{url} -d '#{request_params.to_json}'`
 
-= render 'form'
-
-= link_to 'Show', @message
-\|
-= link_to 'Back', messages_path
+NOTIFIED

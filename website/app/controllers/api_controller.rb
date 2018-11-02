@@ -43,8 +43,8 @@ class ApiController < ApplicationController
                     unless data["pain"].nil?
                         @mes.update(pain: data["pain"])
                     end
-                    unless data["bodypart"].nil?
-                        @mes.update(bodypart: data["bodypart"])
+                    unless data["bodyPart"].nil?
+                        @mes.update(bodypart: data["bodyPart"])
                     end
                     unless data["cause"].nil?
                         @mes.update(cause: data["cause"])
@@ -54,6 +54,7 @@ class ApiController < ApplicationController
             end
 
             request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64("Er zijn nog "+Message.count.to_s+" Wachtende voor u")}
+            # request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64('{"response": 17, "time": 17878}')}
             # url = "https://ptsv2.com/t/4vz8n-1541087003/post"
             url = params["downlink_url"]
             
