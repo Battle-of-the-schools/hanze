@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_133326) do
+ActiveRecord::Schema.define(version: 2018_11_02_052549) do
 
   create_table "caretakers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 2018_11_01_133326) do
     t.string "downlink_url"
     t.string "app_id"
     t.string "dev_id"
+    t.integer "level"
+    t.integer "pain"
+    t.integer "bodypart"
+    t.integer "cause"
   end
 
 end
