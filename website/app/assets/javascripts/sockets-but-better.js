@@ -27,17 +27,19 @@ setInterval(() => {
         </div>
         `;
 
-        var redMarker = new L.DivIcon({
-            className: 'help-marker red',
-            html: '<div class="help-marker-inner"></div><div class="help-marker-inner2"></div>'
-        })
 
         div ? (() => {
             div.outerHTML = html;
         })() : (() => {
             document.getElementById("deadhumans").innerHTML += html;
+
+            var redMarker = new L.DivIcon({
+                className: 'help-marker red',
+                html: '<div class="help-marker-inner"></div><div class="help-marker-inner2"></div>'
+            })
+            
             var markertje = L.marker([almostDeadHuman.latitude, almostDeadHuman.longitude], {icon: redMarker})
-            markertje.addto(window.map)
+            markertje.addTo(window.map)
         })()
 
     }
