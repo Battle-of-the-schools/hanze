@@ -53,7 +53,7 @@ class ApiController < ApplicationController
                 @mes.save
             end
 
-            request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64("Er zijn nog "+Message.count.to_s+" Wachtende voor u")}
+            request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64("Er zijn nog "+(Message.count - 1).to_s+" Wachtende voor u")}
             # request_params = {"dev_id": params["dev_id"], "confirmed": false, "payload_raw": Base64.encode64('{"response": 17, "time": 17878}')}
             # url = "https://ptsv2.com/t/4vz8n-1541087003/post"
             url = params["downlink_url"]
